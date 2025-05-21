@@ -798,6 +798,133 @@ END;
 * **Structured testing** of database logic.
 * Real-world interaction with the database system supporting **MIS goals** like automation, decision-support, and error-free data management.
 
+---
+
+\#️⃣ **VII. Phase: Advanced Database Programming and Auditing**
+
+🚀 **Phase Overview**
+This phase focuses on enhancing the Online Retail Management System by introducing **advanced PL/SQL programming techniques** and implementing **auditing mechanisms**. These features help increase security, ensure compliance, and automate critical system tasks.
+
+---
+
+📌 **Problem Statement**
+The Online Retail Inventory & Order Management System handles sensitive data such as product pricing, order status, and customer information. To ensure operational integrity and data security:
+
+* **Employees should be restricted from manipulating data (INSERT, UPDATE, DELETE)** during weekdays and public holidays.
+* **System must track all attempts to modify data**, logging them for auditing purposes.
+
+🎯 **Objective**: Apply triggers, auditing, functions, and packages to restrict unauthorized activities and monitor changes for compliance.
+
+---
+
+📅 **Holiday Reference Table**
+
+```sql
+CREATE TABLE holiday_schedule (
+  holiday_date DATE PRIMARY KEY,
+  holiday_name VARCHAR2(100)
+);
+
+-- Sample data
+INSERT INTO holiday_schedule VALUES (TO_DATE('2025-06-01', 'YYYY-MM-DD'), 'National Heroes Day');
+INSERT INTO holiday_schedule VALUES (TO_DATE('2025-06-15', 'YYYY-MM-DD'), 'Founders Day');
+```
+
+📊 **Audit Log Table**
+
+```sql
+CREATE TABLE audit_log (
+  audit_id NUMBER GENERATED ALWAYS AS IDENTITY,
+  username VARCHAR2(50),
+  action_date TIMESTAMP,
+  action_type VARCHAR2(20),
+  status VARCHAR2(20),
+  table_name VARCHAR2(50),
+  PRIMARY KEY (audit_id)
+);
+```
+
+---
+
+🔁 **Trigger Implementation**
+
+✅ **Compound Trigger to Block DMLs on Weekdays and Holidays**
+
+```sql
+CREATE OR REPLACE TRIGGER prevent_dml_weekday_holiday
+BEFORE INSERT OR UPDATE OR DELETE ON products
+COMPOUND TRIGGER
+
+  l_day VARCHAR2(10);
+  l_today DATE := TRUNC(SYSDATE);
+  l_user VARCHAR2(30);
+
+BEFORE STATEMENT IS
+BEGIN
+  SELECT TO_CHAR(SYSDATE, 'DAY'), USER INTO l_day, l_user FROM dual;
+
+  -- Normalize day string to uppercase no spaces
+  l_day := REPLACE(UPPER(TRIM(l_day)), ' ', '');
+
+  IF l_day IN ('MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY') OR
+     EXISTS (SELECT 1 FROM holiday_schedule WHERE holiday_date = l_today) THEN
+    INSERT INTO audit_log (username, action_date, action_type, status, table_name)
+    VALUES (l_user, SYSTIMESTAMP, 'BLOCKED DML', 'DENIED', 'PRODUCTS');
+
+    RAISE_APPLICATION_ERROR(-20001, 'DML operations are restricted on weekdays or holidays.');
+  END IF;
+END BEFORE STATEMENT;
+
+END prevent_dml_weekday_holiday;
+```
+
+---
+
+📦 **Audit Package & Functions**
+
+🛠️ **Package Specification**
+
+```sql
+CREATE OR REPLACE PACKAGE audit_pkg AS
+  PROCEDURE log_activity(p_action_type VARCHAR2, p_table_name VARCHAR2);
+END audit_pkg;
+```
+
+🧰 **Package Body**
+
+```sql
+CREATE OR REPLACE PACKAGE BODY audit_pkg AS
+  PROCEDURE log_activity(p_action_type VARCHAR2, p_table_name VARCHAR2) IS
+  BEGIN
+    INSERT INTO audit_log (username, action_date, action_type, status, table_name)
+    VALUES (USER, SYSTIMESTAMP, p_action_type, 'ALLOWED', p_table_name);
+  END;
+END audit_pkg;
+```
+
+🧪 **Example Trigger Calling Audit Package**
+
+```sql
+CREATE OR REPLACE TRIGGER audit_customers
+AFTER INSERT OR UPDATE OR DELETE ON customers
+FOR EACH ROW
+BEGIN
+  audit_pkg.log_activity('MODIFY', 'CUSTOMERS');
+END;
+```
+
+---
+
+🔐 **Explanation of Security Enhancement**
+
+* 🎯 **Enforces Compliance**: Only allows data changes on weekends (Saturday/Sunday) and non-holiday days.
+* 🕵️‍♂️ **Audits All Attempts**: Whether the operation is successful or denied, every attempt is logged.
+* ⚙️ **Automated Monitoring**: Uses PL/SQL packages for modular and reusable auditing logic.
+* 🧱 **Robust Security Layer**: Prevents unauthorized or policy-violating operations.
+
+---
+
+This phase strengthens the system's trustworthiness and robustness by implementing essential security and auditing logic while maintaining modular design. You are now ready to demonstrate advanced database interaction techniques in your Oracle-based MIS solution!
 
 
 
