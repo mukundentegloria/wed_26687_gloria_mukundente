@@ -800,24 +800,27 @@ END;
 
 ---
 
-\#️⃣ **VII. Phase: Advanced Database Programming and Auditing**
+# \#️⃣ VII. Phase: Advanced Database Programming and Auditing**
 
-🚀 **Phase Overview**
+## 🚀 Phase Overview
 This phase focuses on enhancing the Online Retail Management System by introducing **advanced PL/SQL programming techniques** and implementing **auditing mechanisms**. These features help increase security, ensure compliance, and automate critical system tasks.
 
 ---
 
-📌 **Problem Statement**
+## 📌 Problem Statement
+
 The Online Retail Inventory & Order Management System handles sensitive data such as product pricing, order status, and customer information. To ensure operational integrity and data security:
 
-* **Employees should be restricted from manipulating data (INSERT, UPDATE, DELETE)** during weekdays and public holidays.
+* **Employees should be restricted from manipulating data (`INSERT`, `UPDATE`, `DELETE`)** during weekdays and public holidays.
 * **System must track all attempts to modify data**, logging them for auditing purposes.
 
-🎯 **Objective**: Apply triggers, auditing, functions, and packages to restrict unauthorized activities and monitor changes for compliance.
+### 🎯 Objective:
+
+Apply triggers, auditing, functions, and packages to restrict unauthorized activities and monitor changes for compliance.
 
 ---
 
-📅 **Holiday Reference Table**
+## 📅 Holiday Reference Table
 
 ```sql
 CREATE TABLE holiday_schedule (
@@ -830,7 +833,7 @@ INSERT INTO holiday_schedule VALUES (TO_DATE('2025-06-01', 'YYYY-MM-DD'), 'Natio
 INSERT INTO holiday_schedule VALUES (TO_DATE('2025-06-15', 'YYYY-MM-DD'), 'Founders Day');
 ```
 
-📊 **Audit Log Table**
+## 📊 Audit Log Table
 
 ```sql
 CREATE TABLE audit_log (
@@ -846,9 +849,9 @@ CREATE TABLE audit_log (
 
 ---
 
-🔁 **Trigger Implementation**
+## 🔁 Trigger Implementation
 
-✅ **Compound Trigger to Block DMLs on Weekdays and Holidays**
+### ✅ Compound Trigger to Block DMLs on Weekdays and Holidays
 
 ```sql
 CREATE OR REPLACE TRIGGER prevent_dml_weekday_holiday
@@ -863,7 +866,6 @@ BEFORE STATEMENT IS
 BEGIN
   SELECT TO_CHAR(SYSDATE, 'DAY'), USER INTO l_day, l_user FROM dual;
 
-  -- Normalize day string to uppercase no spaces
   l_day := REPLACE(UPPER(TRIM(l_day)), ' ', '');
 
   IF l_day IN ('MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY') OR
@@ -880,9 +882,9 @@ END prevent_dml_weekday_holiday;
 
 ---
 
-📦 **Audit Package & Functions**
+### 📦 Audit Package & Functions
 
-🛠️ **Package Specification**
+### 🛠️ Package Specification
 
 ```sql
 CREATE OR REPLACE PACKAGE audit_pkg AS
@@ -890,7 +892,7 @@ CREATE OR REPLACE PACKAGE audit_pkg AS
 END audit_pkg;
 ```
 
-🧰 **Package Body**
+### 🧰 Package Body
 
 ```sql
 CREATE OR REPLACE PACKAGE BODY audit_pkg AS
@@ -902,7 +904,7 @@ CREATE OR REPLACE PACKAGE BODY audit_pkg AS
 END audit_pkg;
 ```
 
-🧪 **Example Trigger Calling Audit Package**
+### 🧪 Example Trigger Calling Audit Package
 
 ```sql
 CREATE OR REPLACE TRIGGER audit_customers
@@ -915,7 +917,7 @@ END;
 
 ---
 
-🔐 **Explanation of Security Enhancement**
+### 🔐 Explanation of Security Enhancement
 
 * 🎯 **Enforces Compliance**: Only allows data changes on weekends (Saturday/Sunday) and non-holiday days.
 * 🕵️‍♂️ **Audits All Attempts**: Whether the operation is successful or denied, every attempt is logged.
