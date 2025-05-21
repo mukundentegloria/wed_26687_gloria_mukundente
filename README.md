@@ -129,74 +129,59 @@ This process supports MIS functions by enabling:
 ### 🏊 3. Use of Swimlanes for Clarity
 ### 📸 Insert Screenshot of Your Swimlane Diagram Here
 
-<img width="724" alt="image" src="https://github.com/user-attachments/assets/cdd25892-f502-4ffe-b7f5-aa8065582c19" />
+<img width="434" alt="image" src="https://github.com/user-attachments/assets/713f3f95-b4e4-4954-b0b9-96cd3242172c" />
+
 
 🛠 Tool Used: Lucidchart or draw.io
 
-🎯 Place your diagram showing customers, sales system, inventory, supplier, and manager in clearly labeled swimlanes.
+### 📐 4. UML/BPMN Notation
 
-Swimlanes Included:
+### ✅ Used BPMN elements such as:
 
-Customer
+ - 🔷 Start and End Events
 
-Sales Application
+ - ⬛ Tasks (e.g., “Check Inventory”, “Send Order to Supplier”)
 
-Inventory System
+ - 🔺 Decision Points (e.g., “Is stock available?”)
 
-Supplier
+ - 🔁 Data Flows and Message Links
 
-MIS Dashboard
+ - 📤 Intermediate Messages (e.g., Notification to Supplier)
 
-Store Manager
+### 🔁 5. Logical Flow
 
-📐 4. UML/BPMN Notation
-✅ Used BPMN elements such as:
+### The model ensures a structured flow:
 
-🔷 Start and End Events
+ - Customer places order 🧾
 
-⬛ Tasks (e.g., “Check Inventory”, “Send Order to Supplier”)
+ - System checks inventory 📦
 
-🔺 Decision Points (e.g., “Is stock available?”)
+ - If in stock → proceed with fulfillment
 
-🔁 Data Flows and Message Links
+ - If not → notify supplier
 
-📤 Intermediate Messages (e.g., Notification to Supplier)
+ - Supplier ships products 🚚
 
-📸 Insert Screenshot of BPMN Diagram Here
+ - System updates stock and notifies customer 📬
 
-Highlight use of start/end events, tasks, and gateways for clarity.
+ - Manager views updates on MIS dashboard 📊
 
-🔁 5. Logical Flow
-The model ensures a structured flow:
+### 📸 Screenshot of UML diagram
 
-Customer places order 🧾
+![image](https://github.com/user-attachments/assets/71110e47-4b71-4db2-b69f-5e589cde80e5)
 
-System checks inventory 📦
 
-If in stock → proceed with fulfillment
+### 📝 6. Diagram Explanation (One Page)
 
-If not → notify supplier
-
-Supplier ships products 🚚
-
-System updates stock and notifies customer 📬
-
-Manager views updates on MIS dashboard 📊
-
-📸 Insert Screenshot Showing Decision Pathway
-
-Highlight the conditional flow between “stock available?” and “send to supplier”.
-
-📝 6. Diagram Explanation (One Page)
-📃 Business Process Explanation
+📃 Business Process Explanation:
 
 This business process focuses on the Order Lifecycle and Inventory Management, showing how various entities work together within an MIS framework. It enhances decision-making by:
 
-🔄 Automating stock updates and supplier communication
+ - 🔄 Automating stock updates and supplier communication
 
-🧠 Allowing managers to see low-stock alerts via MIS dashboard
+ - 🧠 Allowing managers to see low-stock alerts via MIS dashboard
 
-📈 Generating analytics for better planning
+ - 📈 Generating analytics for better planning
 
-The MIS role here is pivotal—it integrates all systems, provides transparency, and ensures quick response times, which significantly improves customer satisfaction and operational efficiency.
+**The MIS role here is pivotal:** it integrates all systems, provides transparency, and ensures quick response times, which significantly improves customer satisfaction and operational efficiency.
 
