@@ -221,7 +221,7 @@ Each entity includes:
 
  - Descriptive attributes
 
-📸 UML/ER Diagram Screenshot:
+### 📸 UML/ER Diagram Screenshot:
 
 ![image](https://github.com/user-attachments/assets/71110e47-4b71-4db2-b69f-5e589cde80e5)
 
@@ -277,7 +277,9 @@ It supports operations such as:
 
  - 🛠️ MIS dashboards for managers
 
-   
+ ---
+
+ 
 
 
 
