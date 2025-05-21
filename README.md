@@ -1,6 +1,8 @@
 # 🗃️ Online Retail Inventory & Order Management System
 
 **Name:** MUKUNDENTE Gloria
+
+
 **Student ID:** 26687
 
 ## 📌 Introduction
@@ -83,6 +85,8 @@ The system will be implemented in a mid-sized retail business that operates onli
 
  - 📈 Support MIS-based analysis through reliable and structured data
 
+---
+
 ## 🔄 Phase II: Business Process Modeling (MIS-Driven)
 
 ### 🎯 Objective
@@ -127,7 +131,7 @@ This process supports MIS functions by enabling:
  - 👨‍💼 Store Manager	Monitors operations and handles escalations
 
 ### 🏊 3. Use of Swimlanes for Clarity
-### 📸 Insert Screenshot of Your Swimlane Diagram Here
+### 📸 Screenshot of Swimlane Diagram
 
 <img width="434" alt="image" src="https://github.com/user-attachments/assets/713f3f95-b4e4-4954-b0b9-96cd3242172c" />
 
@@ -136,7 +140,7 @@ This process supports MIS functions by enabling:
 
 ### 📐 4. UML/BPMN Notation
 
-### ✅ Used BPMN elements such as:
+### ✅ Used BPMN elements are:
 
  - 🔷 Start and End Events
 
@@ -171,7 +175,7 @@ This process supports MIS functions by enabling:
 ![image](https://github.com/user-attachments/assets/71110e47-4b71-4db2-b69f-5e589cde80e5)
 
 
-### 📝 6. Diagram Explanation (One Page)
+### 📝 6. Diagram Explanation 
 
 📃 Business Process Explanation:
 
