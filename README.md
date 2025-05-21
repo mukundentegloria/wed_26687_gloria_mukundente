@@ -424,7 +424,7 @@ CREATE TABLE PRODUCTS (
 );
 ```
 ### 📑 ORDERS TABLE
--- ====================================
+
 ```sql
 CREATE TABLE ORDERS (
     order_id      NUMBER PRIMARY KEY,
@@ -437,7 +437,7 @@ CREATE TABLE ORDERS (
 );
 ```
 ### 📦 ORDER_ITEMS TABLE
--- ====================================
+ 
 ```sql
 CREATE TABLE ORDER_ITEMS (
     item_id       NUMBER PRIMARY KEY,
@@ -524,6 +524,8 @@ GROUP BY c.customer_id, c.name;
    and lead time.
 
  - **Not Null:** Guarantees critical fields are never left empty.
+
+---
 
 
 
