@@ -361,9 +361,7 @@ Grant succeeded.
 
 *  **Use:** To assigns full privileges for database operations.
 
-
-<img width="933" alt="OM" src="https://github.com/user-attachments/assets/c4455f07-3e56-4dc4-97d0-72c5af0f14d5" />
-
+<img width="958" alt="pdb creation" src="https://github.com/user-attachments/assets/4ef60a69-76e2-493c-a7c7-da09458d4ac2" />
 
 ### ⚖️ **Oracle Enterprise Manager (OEM)**
 
