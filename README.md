@@ -170,11 +170,6 @@ This process supports MIS functions by enabling:
 
  - Manager views updates on MIS dashboard 📊
 
-### 📸 Screenshot of UML diagram
-
-![image](https://github.com/user-attachments/assets/71110e47-4b71-4db2-b69f-5e589cde80e5)
-
-
 ### 📝 6. Diagram Explanation 
 
 📃 Business Process Explanation:
@@ -188,4 +183,110 @@ This business process focuses on the Order Lifecycle and Inventory Management, s
  - 📈 Generating analytics for better planning
 
 **The MIS role here is pivotal:** it integrates all systems, provides transparency, and ensures quick response times, which significantly improves customer satisfaction and operational efficiency.
+
+---
+
+# 🧠 Phase III: Logical Model Design
+
+**🔖 Covers:** *Entity Design*, *Attributes*, *Keys*, *Relationships*, *Constraints*, *Normalization*, *Real-World Scenarios*
+
+## 🎯 Objective
+
+This phase is dedicated to constructing a logical data model for the Online Retail Inventory & Order Management System. The design ensures that the system aligns with both:
+
+#### 🧩 Phase I – the problem definition (real-world retail order processing),
+
+#### 🔄 Phase II – the business process model (MIS-driven workflow).
+
+The logical model serves as a `blueprint` before moving to physical implementation (Phase IV).
+
+🗂️ 1. Entity-Relationship (ER) Model
+We identified key entities that reflect the operations of a retail business. These entities capture all critical data used to support management decisions.
+
+## 👥 Entities and Their Roles:
+
+| Entity           | Description                         |
+| ---------------- | ----------------------------------- |
+| 👤 `Customers`   | Buyers who place orders             |
+| 🧾 `Orders`      | Transactions initiated by customers |
+| 🛒 `Order_Items` | Details of products in each order   |
+| 📦 `Products`    | Goods available for purchase        |
+| 🚚 `Suppliers`   | Vendors supplying the products      |
+
+Each entity includes:
+
+ - Primary Keys (PKs) 🔑
+
+ - Foreign Keys (FKs) 🔗
+
+ - Descriptive attributes
+
+📸 UML/ER Diagram Screenshot:
+
+![image](https://github.com/user-attachments/assets/71110e47-4b71-4db2-b69f-5e589cde80e5)
+
+## 🔗 2. Relationships & Constraints
+### 🔄 Entity Relationships:
+
+| Relationship               | Type        | Description                           |
+| -------------------------- | ----------- | ------------------------------------- |
+| `Customers` → `Orders`     | One-to-Many | A customer can place multiple orders  |
+| `Orders` → `Order_Items`   | One-to-Many | Each order contains multiple products |
+| `Order_Items` → `Products` | Many-to-One | Each item refers to one product       |
+| `Products` → `Suppliers`   | Many-to-One | Products are linked to one supplier   |
+
+### ⚙️ Constraints Applied:
+
+| Constraint Type    | Example                                      |
+| ------------------ | -------------------------------------------- |
+| **Primary Key** 🔑 | `customer_id`, `order_id`, etc.              |
+| **Foreign Key** 🔗 | `order_items.order_id → orders.order_id`     |
+| **NOT NULL** ❗     | `product_name`, `price`, `quantity`          |
+| **UNIQUE** 🔁      | `customer_email`, `product_code`             |
+| **CHECK** ✅        | `price > 0`, `quantity >= 0`                 |
+| **DEFAULT** 🧾     | `order_date = SYSDATE`, `status = 'Pending'` |
+
+### 📐 3. Normalization (Up to 3NF)
+To ensure data integrity and reduce redundancy, the design follows the Third Normal Form (3NF):
+
+| Form | Explanation                          | Applied? |
+| ---- | ------------------------------------ | -------- |
+| 1NF  | No repeating groups, atomic columns  | ✅        |
+| 2NF  | All attributes fully dependent on PK | ✅        |
+| 3NF  | No transitive dependencies           | ✅        |
+
+## 🌐 4. Real-World Data Handling
+
+The schema accounts for real-world use cases:
+
+ - ✔️ A customer reorders multiple times
+
+ - ✔️ Each order tracks multiple items
+
+ - ✔️ Inventory is updated through suppliers
+
+ - ✔️ Prices, discounts, or availability can vary by product
+
+It supports operations such as:
+
+ - 📊 Order tracking
+
+ - 📦 Inventory restocking
+
+ - 📈 Sales reporting
+
+ - 🛠️ MIS dashboards for managers
+
+   
+
+
+
+
+
+
+
+
+
+
+
 
