@@ -279,11 +279,102 @@ It supports operations such as:
 
  ---
 
- 
+ # 🗃️ Phase IV: Database Creation and Naming (Pluggable Database Implementation)
+
+**🔖 Covers:** `Physical DB creation`, `user access`, `naming conventions`, `Oracle OEM setup`, `GitHub documentation`
+
+## 🎯 Objective
+
+This phase focuses on building the physical environment for the system designed in Phases I–III. Using Oracle PL/SQL, we establish a named pluggable database, manage user roles, and prepare for monitoring and reporting via Oracle Enterprise Manager (OEM). This foundation allows the logical model to be executed in a real database environment.
+
+### 🔨Database Creation
+
+The Pluggable Database (PDB) was created using the following naming format:
+
+```sql
+Database Name: wed_26687_gloria_online_retail_db
+Username: gloria
+Password: gloria
+```
+### Steps Executed in SQL Command Prompt
+
+**1.Create a pluggable database:**
+
+```sql
+SQL> CREATE PLUGGABLE DATABASE wed_26687_gloria_online_retail_db
+  2  ADMIN USER gloria IDENTIFIED BY gloria
+  3    FILE_NAME_CONVERT = (
+  4      'C:\ORACLE21C\ORADATA\ORCL\PDBSEED\',
+  5      'C:\ORACLE21C\ORADATA\ORCL\WED_26687_GLORIA_ONLINE_RETAIL_DB\'
+  6    );
+
+Pluggable database created.
+```
+**2.Open the newly created PDB:**
+
+```sql
+
+SQL> ALTER PLUGGABLE DATABASE wed_26687_gloria_online_retail_db OPEN;
+
+Pluggable database altered.
+
+```
+* **Use** Makes the PDB ready for operations.
+
+#### 3.save the newly created PDB.
 
 
+```sql
+SQL> ALTER PLUGGABLE DATABASE wed_26687_gloria_online_retail_db SAVE STATE;
 
+Pluggable database altered.
+```
+* **Use** It makes sure that the PDB remains open after the database restarts.
 
+#### 4. Set the Session Container
+
+```sql
+SQL> ALTER SESSION SET CONTAINER = wed_26687_gloria_online_retail_db;
+
+Session altered.
+```
+* **Use:** It changes the session to the newly created PDB for subsequent operations.
+
+### 5.User Creation and Privilege Assignment
+
+#### Create a Database User
+
+```sql
+SQL> create user gloria identified by gloria;
+
+User created.
+```
+* **Use:** It creates a new user, gloria, with the password gloria.
+
+#### Grant Basic Privileges
+
+```sql
+SQL> GRANT CONNECT, RESOURCE, DBA, SYSDBA TO gloria;
+
+Grant succeeded.
+```
+
+*  **Use:** To assigns full privileges for database operations.
+
+Sure! Here's a paraphrased version of your sentences:
+
+---
+
+### ⚖️ **Oracle Enterprise Manager (OEM)**
+
+The **OEM dashboard** verified that:
+
+* The database was created successfully.
+* Table relationships were correctly established and implemented.
+
+## 📸 OEM screenshot of successful database creation and table relationships.
+
+<img width="933" alt="OM" src="https://github.com/user-attachments/assets/b5189843-71b6-4921-b596-b9f79371a5fd" />
 
 
 
