@@ -527,6 +527,276 @@ GROUP BY c.customer_id, c.name;
 
 ---
 
+## 🔄 VI. Phase: Database Interaction and Transactions
+
+### 🌟 Phase Overview
+
+This phase ensures that the system effectively interacts with the database using SQL operations, procedures, functions, cursors, transactions, and packages. It supports data manipulation, transformation, analytics, and modular design — all aligned with the objectives defined in earlier phases.
+
+---
+
+## 🛠️ 1. DML (Data Manipulation Language)
+
+### 📅 INSERT – *Add New Records*
+
+**Purpose:** Adds new entries to a table.
+
+```sql
+INSERT INTO customers (customer_id, name, email, phone)
+VALUES (1, 'Alice Johnson', 'alice@example.com', '0788123456');
+```
+
+✅ **Output:** 1 row inserted – a new customer record is added.
+
+---
+
+### ✏️ UPDATE – *Modify Existing Records*
+
+**Purpose:** Changes existing data in a table.
+
+```sql
+UPDATE customers
+SET email = 'alice.j@example.com'
+WHERE customer_id = 1;
+```
+
+✅ **Output:** 1 row updated – the customer’s email is modified.
+
+---
+
+### ❌ DELETE – *Remove Records*
+
+**Purpose:** Deletes specific entries from a table.
+
+```sql
+DELETE FROM customers
+WHERE customer_id = 1;
+```
+
+✅ **Output:** 1 row deleted – the customer record is removed.
+
+---
+
+## 🧱 2. DDL (Data Definition Language)
+
+### 📦 CREATE – *Define New Tables or Structures*
+
+**Purpose:** Creates a new table in the database.
+
+```sql
+CREATE TABLE categories (
+  category_id NUMBER PRIMARY KEY,
+  category_name VARCHAR2(100) NOT NULL
+);
+```
+
+✅ **Output:** Table `categories` created.
+
+---
+
+### 🧩 ALTER – *Modify Existing Structure*
+
+**Purpose:** Changes the structure of an existing table.
+
+```sql
+ALTER TABLE categories
+ADD status VARCHAR2(10) DEFAULT 'active';
+```
+
+✅ **Output:** Column `status` added to `categories`.
+
+---
+
+### 🛁 DROP – *Delete Table or Database Objects*
+
+**Purpose:** Permanently removes a table.
+
+```sql
+DROP TABLE categories;
+```
+
+✅ **Output:** Table `categories` dropped from the database.
+
+---
+
+## ⚙️ 3. Stored Procedures
+
+### 📌 Example: Get Product Info by ID
+
+**Purpose:** Fetch product details for a given product ID.
+
+```sql
+CREATE OR REPLACE PROCEDURE get_product_info(p_id IN NUMBER) AS
+  v_name products.name%TYPE;
+  v_price products.price%TYPE;
+BEGIN
+  SELECT name, price INTO v_name, v_price
+  FROM products
+  WHERE product_id = p_id;
+
+  DBMS_OUTPUT.PUT_LINE('Product Name: ' || v_name || ', Price: ' || v_price);
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('No product found with ID ' || p_id);
+END;
+/
+```
+
+✅ **Execution:**
+
+```sql
+EXEC get_product_info(101);
+```
+
+📄 **Output:** `Product Name: Laptop, Price: 950000`
+
+---
+
+## 🧰 4. Functions
+
+### 🌟 Example: Calculate Stock Value
+
+**Purpose:** Returns total stock value for a product.
+
+```sql
+CREATE OR REPLACE FUNCTION calculate_stock_value(p_id IN NUMBER)
+RETURN NUMBER IS
+  v_price products.price%TYPE;
+  v_qty products.quantity%TYPE;
+BEGIN
+  SELECT price, quantity INTO v_price, v_qty
+  FROM products
+  WHERE product_id = p_id;
+
+  RETURN v_price * v_qty;
+END;
+/
+```
+
+✅ **Usage:**
+
+```sql
+SELECT calculate_stock_value(101) AS total_stock_value FROM dual;
+```
+
+📄 **Output:** `Total_Stock_Value: 3800000`
+
+---
+
+## 🔄 5. Cursors
+
+### 📓 Example: Loop Through All Customers
+
+**Purpose:** Read all customers and print their details.
+
+```sql
+DECLARE
+  CURSOR cust_cursor IS
+    SELECT name, email FROM customers;
+
+  v_name customers.name%TYPE;
+  v_email customers.email%TYPE;
+BEGIN
+  OPEN cust_cursor;
+  LOOP
+    FETCH cust_cursor INTO v_name, v_email;
+    EXIT WHEN cust_cursor%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE('Name: ' || v_name || ', Email: ' || v_email);
+  END LOOP;
+  CLOSE cust_cursor;
+END;
+/
+```
+
+✅ **Output:**
+
+```
+Name: Alice Johnson, Email: alice@example.com
+Name: John Doe, Email: john@example.com
+...
+```
+
+---
+
+## 📦 6. Packages
+
+### 🌟 Purpose: Group Related Procedures and Functions
+
+```sql
+CREATE OR REPLACE PACKAGE customer_pkg AS
+  PROCEDURE print_customers;
+  FUNCTION get_customer_email(p_id NUMBER) RETURN VARCHAR2;
+END customer_pkg;
+/
+```
+
+### 📦 Package Body
+
+```sql
+CREATE OR REPLACE PACKAGE BODY customer_pkg AS
+
+  PROCEDURE print_customers IS
+    CURSOR c IS SELECT name, email FROM customers;
+    v_name customers.name%TYPE;
+    v_email customers.email%TYPE;
+  BEGIN
+    FOR cust IN c LOOP
+      DBMS_OUTPUT.PUT_LINE(cust.name || ': ' || cust.email);
+    END LOOP;
+  END;
+
+  FUNCTION get_customer_email(p_id NUMBER) RETURN VARCHAR2 IS
+    v_email customers.email%TYPE;
+  BEGIN
+    SELECT email INTO v_email FROM customers WHERE customer_id = p_id;
+    RETURN v_email;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+      RETURN 'Email not found';
+  END;
+
+END customer_pkg;
+/
+```
+
+✅ **Execution:**
+
+```sql
+EXEC customer_pkg.print_customers;
+SELECT customer_pkg.get_customer_email(1) FROM dual;
+```
+
+---
+
+## 🚑 7. Exception Handling
+
+### ⚠️ Example: Error in Order Lookup
+
+```sql
+BEGIN
+  SELECT * FROM orders WHERE order_id = 9999;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('Order not found.');
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Unexpected error: ' || SQLERRM);
+END;
+/
+```
+
+✅ **Output:** `Order not found.`
+
+---
+
+## ✅ What This Phase Covers
+
+* Use of **DML** to manipulate data (Insert, Update, Delete).
+* Use of **DDL** to define and modify database structures.
+* Implementation of **modular PL/SQL** using procedures, functions, and packages.
+* Use of **cursors** for row-by-row data handling.
+* Application of **exception handling** to ensure graceful error reporting.
+* **Structured testing** of database logic.
+* Real-world interaction with the database system supporting **MIS goals** like automation, decision-support, and error-free data management.
 
 
 
