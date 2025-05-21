@@ -136,7 +136,7 @@ This process supports MIS functions by enabling:
 <img width="434" alt="image" src="https://github.com/user-attachments/assets/713f3f95-b4e4-4954-b0b9-96cd3242172c" />
 
 
-🛠 Tool Used: Lucidchart or draw.io
+🛠 Tool Used: draw.io
 
 ### 📐 4. UML/BPMN Notation
 
