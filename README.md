@@ -361,9 +361,9 @@ Grant succeeded.
 
 *  **Use:** To assigns full privileges for database operations.
 
-Sure! Here's a paraphrased version of your sentences:
 
----
+<img width="933" alt="OM" src="https://github.com/user-attachments/assets/c4455f07-3e56-4dc4-97d0-72c5af0f14d5" />
+
 
 ### ⚖️ **Oracle Enterprise Manager (OEM)**
 
