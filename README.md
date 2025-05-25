@@ -7,9 +7,7 @@
 
 ## 📌 Introduction
 
-In the modern business landscape, managing product inventory, tracking customer orders, and maintaining supplier relationships are essential operations for any retail organization. Manual processes often result in errors, inefficiencies, and delays, directly impacting customer satisfaction and revenue.
-
-This project addresses these challenges by building a robust Oracle-based solution using PL/SQL, designed to streamline the core functions of an online retail system.
+Mid-sized retail businesses struggle with inefficient manual inventory and order management systems, leading to stock inaccuracies, delayed order processing, and poor supplier coordination. These outdated processes result in lost sales, frustrated customers, and operational inefficiencies. Additionally, the lack of real-time data tracking and auditing mechanisms makes it difficult to monitor changes or generate actionable insights. To address these challenges, this project develops an Oracle PL/SQL-based Retail Inventory & Order Management System that automates stock tracking, enforces data integrity through constraints, and provides real-time reporting. By implementing triggers, audit logs, and modular PL/SQL programming, the system ensures secure, efficient, and data-driven retail operations while reducing errors and improving decision-making
 
 ## 🌐 Project Overview
 
